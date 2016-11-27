@@ -97,6 +97,9 @@ void generation_genotype_aleatoire(int nbIndividus, int tailleGenotype, int maxL
 		affiche_tableau(haplotype1, tailleGenotype);
 		printf("\nHaplotype 2 : ");
 		affiche_tableau(haplotype2, tailleGenotype);
+		
+		creer_fichier_genotypes(genotype, tailleGenotype, individu);
+		creer_fichier_haplotypes(genotype, haplotype1, haplotype2, tailleGenotype, individu);
 	}
 }
 
@@ -111,6 +114,62 @@ void affiche_tableau(int tableau[], int tailleTableau)
 	}
 
 }
+
+//Fonction écriture fichiers texte
+void creer_fichier_genotypes(int genotype[], int tailleTableau, int individu)
+{
+	FILE* fichier_genotype = NULL;
+	int i;
+	
+	fichier_genotype = fopen("genotypes_alea.txt", "a");
+	
+	if (fichier_genotype != NULL)
+	{
+		fprintf(fichier_genotype, "/ind %d ", individu);
+		for (i = 0 ; i < tailleTableau ; i++)
+		{
+			fprintf(fichier_genotype, "%d", genotype[i]);
+		}
+		fprintf(fichier_genotype, "\n");
+		fclose(fichier_genotype);
+	}
+}
+
+void creer_fichier_haplotypes(int genotype[], int haplotype1[], int haplotype2[], int tailleTableau, int individu)
+{
+	FILE* fichier_haplotypes = NULL;
+	int j,k,l;
+	
+	fichier_haplotypes = fopen("haplotypes_alea.txt", "a");
+	
+	if (fichier_haplotypes != NULL)
+	{
+		fprintf(fichier_haplotypes, "/ind %d geno ", individu);
+		for(j = 0 ; j < tailleTableau ; j++)
+		{
+			fprintf(fichier_haplotypes, "%d", genotype[j]);
+		}
+		
+		fprintf(fichier_haplotypes, "\n/ind %d real haplo1 ", individu);
+		j = 0;
+		for(k = 0 ; k < tailleTableau ; k++)
+		{
+			fprintf(fichier_haplotypes, "%d", haplotype1[k]);
+		}
+		
+		fprintf(fichier_haplotypes, "\n/ind %d real haplo2 ", individu);
+		l = 0;
+		for(l = 0 ; l < tailleTableau ; l++)
+		{
+			fprintf(fichier_haplotypes, "%d", haplotype2[l]);
+		}
+		fprintf(fichier_haplotypes, "\n");
+		fclose(fichier_haplotypes);
+	}
+}
+			
+	
+	
 
 
 

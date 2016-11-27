@@ -9,6 +9,8 @@ void tirage_avec_ambiguite(int* genotype, int* haplotype1, int* haplotype2, int 
 void tirage_sans_ambiguite(int* genotype, int* haplotype1, int* haplotype2, int position);
 void tirage_loci_aleatoire(int* genotype, int* haplotype1, int* haplotype2, int tailleGenotype, int maxLociAmbigus);
 void generation_genotype_aleatoire(int nbIndividus, int tailleGenotype, int maxLociAleatoire);
+void creer_fichier_genotypes(int genotype[], int tailleTableau, int individu);
+void creer_fichier_haplotypes(int genotype[], int haplotype1[], int haplotype2[], int tailleTableau, int individu);
 
 
 // ** Definitions Inference haplotypes **
