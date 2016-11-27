@@ -5,70 +5,98 @@
 //Fonction tirage aleatoire dans l'intervalle [a,b[
 int rand_a_b(int a, int b)
 {
-	printf("rand\n");
 	return rand()%(b-a) +a;
 }
 
-int tableau[10]
-
-//Fonction génération de génotype aléatoires
-void  generation_genotype_aleatoire(int nbIndividus, int tailleGenotype, int maxLociAmbigus)
+//Fonction génération de loci aléatoire avec positions ambigues
+void tirage_avec_ambiguite(int* genotype, int* haplotype1, int* haplotype2, int position, int nbLociAmbigus)
 {
-	printf("fonction ok\n");
-	printf("nombre d'individus = %d\n", nbIndividus);
-	printf("taille génotype = %d\n", tailleGenotype);
-	printf("nombre max de loci ambigus = %d\n",  maxLociAmbigus);
-	int genotype[tailleGenotype],haplotype1[tailleGenotype], haplotype2[tailleGenotype];
-	int lociAleatoire, lociAmbHap, individu, position, nbLociAmbigus=0;
-	while(individu < nbIndividus) //Tant que le nombre d'individu est inférieur à 12
+	int lociAleatoire, lociAmbHap=0;
+	
+	lociAleatoire = rand_a_b(0,3);
+	
+	if (lociAleatoire == 1 || lociAleatoire == 0)
+	{
+		genotype[position] = lociAleatoire;
+		haplotype1[position] = lociAleatoire;
+		haplotype2[position] = lociAleatoire;
+	}			
+	else if (lociAleatoire == 2)//Si un loci ambigu dans la séquence, sélection aléatoire du 0 ou du 1 pour les haplotypes générés
 	{ 
-	printf("boucle individu\n");
-		while(position < tailleGenotype) //Tant que les 10 positions du genome n'ont pas été générés
+		genotype[position] = lociAleatoire;
+		lociAmbHap = rand_a_b(0, 2) ; 
+		haplotype1[position] = lociAmbHap;
+		if (lociAmbHap == 0) 
 		{
-		printf("boucle genotype\n");
-			if (nbLociAmbigus < maxLociAmbigus) //Si le nombre de loci ambigu dans la séquence est inférieur à 3
-			{ 
-				lociAleatoire = rand_a_b(0,3) ; //Tirage aléatoire dans l'intervalle [0,3[
-				printf("ok\n");
-				printf("loci Aleatoire : %d\n", lociAleatoire);
-				if (lociAleatoire == 1 || lociAleatoire == 0)
-				{
-					genotype[tailleGenotype] = lociAleatoire;
-					haplotype1[tailleGenotype] = lociAleatoire;
-					haplotype2[tailleGenotype] = lociAleatoire;
-					printf("loci alea < 3\n");
-				}			
-				else if (lociAleatoire == 2)//Si un loci ambigu dans la séquence, sélection aléatoire du 0 ou du 1 pour les haplotypes générés
-				{ 
-					genotype[tailleGenotype] = lociAleatoire;
-					lociAmbHap = rand_a_b(0, 2) ; 
-					haplotype1[tailleGenotype] = lociAmbHap;
-					printf("loci ambigu trouvé");
-					if (lociAmbHap == 0) 
-					{
-						haplotype2[tailleGenotype] = 1;
-					}else if (lociAmbHap == 1)
-					{
-						haplotype2[tailleGenotype] = 0;
-					}
-					nbLociAmbigus++ ;
-				}
-			}
-			if (nbLociAmbigus >= maxLociAmbigus) // Si le nombre de 2 dans la séquence est supérieur à 3
-			{ 
-				lociAleatoire = rand_a_b(0, 2) ; //Tirage aléatoire dans l'intervalle [0, 2[
-				if (lociAleatoire == 1 || lociAleatoire == 0)
-				{
-					genotype[tailleGenotype] = lociAleatoire ;
-					haplotype1[tailleGenotype] = lociAleatoire;
-					haplotype2 [tailleGenotype] = lociAleatoire;
-					printf("nb loci ambigu max");
-				}
-			}
-		position++;
+			haplotype2[position] = 1;
+		}else if (lociAmbHap == 1)
+		{
+			haplotype2[position] = 0;
 		}
-	affiche_tableau(genotype[position], tailleGenotype);
-	individu++;
+		nbLociAmbigus ++ ;
+	} 
+}
+
+//Fonction génération de loci aléatoire sans positions ambigues
+void tirage_sans_ambiguite(int* genotype, int* haplotype1, int* haplotype2, int position)
+{
+	int lociAleatoire=0;
+	lociAleatoire = rand_a_b(0, 2) ; //Tirage aléatoire dans l'intervalle [0, 2[
+	if (lociAleatoire == 1 || lociAleatoire == 0)
+	{
+		genotype[position] = lociAleatoire ;
+		haplotype1[position] = lociAleatoire;
+		haplotype2 [position] = lociAleatoire;
+	}
+}
+
+//Fonction génération aléatoire des positions d'un génome
+void tirage_loci_aleatoire(int* genotype, int* haplotype1, int* haplotype2, int tailleGenotype, int maxLociAmbigus)
+{
+	int nbLociAmbigus=0;
+	int position = 1;
+	
+	for (position = 0; position < tailleGenotype; position ++)
+	{
+		if (nbLociAmbigus < maxLociAmbigus)
+		{
+			tirage_avec_ambiguite(genotype, haplotype1, haplotype2, position, nbLociAmbigus);
+		}
+		else if (nbLociAmbigus >= maxLociAmbigus)
+		{
+			tirage_sans_ambiguite(genotype, haplotype1, haplotype2, position);
+		}
+	}
+}
+
+//Fonction génération aléatoire d'un génotypes pour chacun des individus	
+void generation_genotype_aleatoire(int nbIndividus, int tailleGenotype, int maxLociAmbigus)
+{
+	//Initialisation des tableaux de génotype et d'haplotypes
+	int* genotype = NULL;
+	int* haplotype1 = NULL;
+	int* haplotype2 = NULL;
+	
+	//Allocations de mémoire
+	genotype = malloc(tailleGenotype * sizeof(int));
+	haplotype1 = malloc(tailleGenotype * sizeof(int));
+	haplotype2 = malloc(tailleGenotype * sizeof(int));
+	
+	//Initialisation compteur du nombre d'individus
+	int individu=1;
+	
+	//Boucle de génération aléatoire de génotype et d'haplotypes pour chacun des individus
+	for (individu = 1; individu <= nbIndividus; individu ++)
+	{
+		tirage_loci_aleatoire(genotype, haplotype1, haplotype2, tailleGenotype, maxLociAmbigus);
+		
+		//Affichages du génotype et des haplotypes générés pour chaque individu
+		printf("\n\nGenotype Individu %d : ", individu);
+		affiche_tableau(genotype, tailleGenotype);
+		printf("\nHaplotype 1  : ");
+		affiche_tableau(haplotype1, tailleGenotype);
+		printf("\nHaplotype 2 : ");
+		affiche_tableau(haplotype2, tailleGenotype);
 	}
 }
 
@@ -81,7 +109,17 @@ void affiche_tableau(int tableau[], int tailleTableau)
 	{
 		printf("%d", tableau[i]);
 	}
+
 }
+
+
+
+
+
+
+
+
+
 
 // ** Fonctions appelées lors de l'exécution de l'algorithme d'inférence d'haplotypes **
 
