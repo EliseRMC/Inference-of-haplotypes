@@ -1,0 +1,36 @@
+/ind 0 geno 0020200012
+/ind 0 real haplo1 0010000010
+/ind 0 real haplo2 0000100011
+/ind 1 geno 2120010200
+/ind 1 real haplo1 0100010000
+/ind 1 real haplo2 1110010100
+/ind 2 geno 0010022200
+/ind 2 real haplo1 0010011100
+/ind 2 real haplo2 0010000000
+/ind 3 geno 1120221000
+/ind 3 real haplo1 1100101000
+/ind 3 real haplo2 1110011000
+/ind 4 geno 0002020012
+/ind 4 real haplo1 0001010010
+/ind 4 real haplo2 0000000011
+/ind 5 geno 0222111111
+/ind 5 real haplo1 0011111111
+/ind 5 real haplo2 0100111111
+/ind 6 geno 0220000200
+/ind 6 real haplo1 0110000000
+/ind 6 real haplo2 0000000100
+/ind 7 geno 1022110012
+/ind 7 real haplo1 1001110011
+/ind 7 real haplo2 1010110010
+/ind 8 geno 2211111200
+/ind 8 real haplo1 0111111100
+/ind 8 real haplo2 1011111000
+/ind 9 geno 0001202210
+/ind 9 real haplo1 0001100010
+/ind 9 real haplo2 0001001110
+/ind 10 geno 2210020010
+/ind 10 real haplo1 0110000010
+/ind 10 real haplo2 1010010010
+/ind 11 geno 1101001222
+/ind 11 real haplo1 1101001111
+/ind 11 real haplo2 1101001000

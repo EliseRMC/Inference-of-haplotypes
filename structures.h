@@ -13,7 +13,9 @@ void creer_fichier_genotypes(int genotype[], int tailleTableau, int individu);
 void creer_fichier_haplotypes(int genotype[], int haplotype1[], int haplotype2[], int tailleTableau, int individu);
 void tirage_loci_ambigu(int* genotype, int tailleGenotype, int maxLociAmbigus);
 void tirage_haplotypes(int* genotype, int* haplotype1, int* haplotype2, int tailleGenotype);
-void nouveaux_tirages_si_doublon(int* genotype1, int* genotype2, int* haplotype1, int* haplotype2, int tailleGenotype, int maxLociAmbigus)
+void nouveaux_tirages_si_doublon(int* genotype1, int* genotype2, int* haplotype1, int* haplotype2, int tailleGenotype, int maxLociAmbigus);
+void lire_genotype(char* ligne, char* genotype, int tailleGenotype);
+void lire_fichier_genotypes(int nbIndividus, int tailleGenotype);
 
 
 // ** Definitions Inference haplotypes **
