@@ -1,3 +1,8 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+
 // ** Fonctions appelées lors de la génération de génotypes aléatoires **
 
 //Fonction écriture fichiers texte
