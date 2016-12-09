@@ -2,12 +2,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include "fonctions.h"
+#include "structures_inference.h"
+#include "fonctions_inference.h"
 
 int main()
 {
-	
 	int nbIndividus, tailleGenotype;
+	
 	
 	//L'utilisateur choisi le nombre d'individu, la taille des génotypes et le maximum de loci ambigus souhaité
 	printf("Entrez le nombre d'individus listés dans le fichier : "); scanf("%d", &nbIndividus);

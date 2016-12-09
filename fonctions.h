@@ -1,7 +1,7 @@
 
 // ** Définitions Génération génotypes aléatoires **
 
-//Fonctions
+//Fonctions generation_genotypes
 int rand_a_b(int a, int b);
 void affiche_tableau(int tableau[], int tailleTableau);
 
@@ -14,6 +14,12 @@ void creer_fichier_haplotypes(int genotype[], int haplotype1[], int haplotype2[]
 void tirage_loci_ambigu(int* genotype, int tailleGenotype, int maxLociAmbigus);
 void tirage_haplotypes(int* genotype, int* haplotype1, int* haplotype2, int tailleGenotype);
 void nouveaux_tirages_si_doublon(int* genotype1, int* genotype2, int* haplotype1, int* haplotype2, int tailleGenotype, int maxLociAmbigus);
+
+
+
+
+//Fonctions algorithme_EM
+
 void lire_genotype(char* ligne, char* genotype, int tailleGenotype);
 void lire_fichier_genotypes(int nbIndividus, int tailleGenotype);
 

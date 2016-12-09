@@ -310,28 +310,4 @@ void lire_fichier_genotypes(int nbIndividus, int tailleGenotype)
 	free(listeGenotypes);
 	free(ligne);
 }
-
-
-/*void lire_fichier_texte()
-{
-	FILE* fichierGenotypes = NULL;
-	char* sequence = NULL;
-	char* genotype = NULL;
-	int individu;
-	int tailleGenotype = 10;
-	int tailleLigne = 19;
-	genotype = (char*)malloc((tailleLigne) * sizeof (char*));
-	sequence = (char*)malloc((tailleGenotype) * sizeof (char*));
 	
- 
-    fichierGenotypes = fopen("genotypes_alea.txt", "r");
- 
-    while (fgets(genotype, tailleLigne, fichierGenotypes) != NULL)
-    {
-        fscanf(genotype, "/ind %d %s", &individu, &genotype);
-        printf("Individu : %d\n Genotype : %s", individu, genotype);
- 
-        fclose(fichierGenotypes);
-    }
-}*/
-			
